@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './@public/navbar/navbar.component';
@@ -7,6 +8,8 @@ import { LoginComponent } from './@public/login/login.component';
 import { SingupComponent } from './@public/singup/singup.component';
 import { RequestResetComponent } from './@public/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './@public/password/response-reset/response-reset.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ProfileComponent } from './@public/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -15,10 +18,12 @@ import { ResponseResetComponent } from './@public/password/response-reset/respon
     LoginComponent,
     SingupComponent,
     RequestResetComponent,
-    ResponseResetComponent
+    ResponseResetComponent,
+    ProfileComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
