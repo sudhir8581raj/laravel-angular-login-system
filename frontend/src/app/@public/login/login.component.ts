@@ -11,7 +11,8 @@ export class LoginComponent implements OnInit {
   public form:any = {
     email : null,
     password : null
-  }
+  };
+  public error: any = null;
   constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
@@ -21,8 +22,11 @@ export class LoginComponent implements OnInit {
     this.http.post('http://127.0.0.1:8000/api/auth/login',this.form).subscribe((response)=>{
       console.log(response);
     },(error)=>{
-      console.log(error);
+      this.handleError(error);
     });
+  }
+  handleError(error){
+    this.error = error.error.error;
   }
 
 }
