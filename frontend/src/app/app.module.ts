@@ -12,6 +12,11 @@ import { ResponseResetComponent } from './@public/password/response-reset/respon
 import { AppRoutingModule } from './app-routing.module';
 import { ProfileComponent } from './@public/profile/profile.component';
 import { SignupComponent } from './@public/signup/signup.component';
+import { UserService } from './@services/user/user.service';
+import { TokenService } from './@services/Token/token.service';
+import { AuthService } from './@services/auth/auth.service';
+import { AfterLoginService } from './@services/middleware/after-login.service';
+import { BeforeLoginService } from './@services/middleware/before-login.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +34,13 @@ import { SignupComponent } from './@public/signup/signup.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    UserService,
+    TokenService,
+    AuthService,
+    AfterLoginService,
+    BeforeLoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

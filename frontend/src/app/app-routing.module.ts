@@ -6,20 +6,25 @@ import { RequestResetComponent } from './@public/password/request-reset/request-
 import { ResponseResetComponent } from './@public/password/response-reset/response-reset.component';
 import { ProfileComponent } from './@public/profile/profile.component';
 import { SignupComponent } from './@public/signup/signup.component';
+import { AfterLoginService } from './@services/middleware/after-login.service';
+import { BeforeLoginService } from './@services/middleware/before-login.service';
 
 
 const appRoutes:Routes = [
   {
     path : "login",
-    component : LoginComponent
+    component : LoginComponent,
+    canActivate :  [BeforeLoginService]
   },
   {
     path : "signup",
-    component : SignupComponent
+    component : SignupComponent,
+    canActivate : [BeforeLoginService]
   },
   {
     path: "profile",
-    component : ProfileComponent
+    component : ProfileComponent,
+    canActivate : [AfterLoginService]
   },
   {
     path: 'request-password-reset',

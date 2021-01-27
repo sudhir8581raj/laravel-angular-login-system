@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { TokenService } from 'src/app/@services/Token/token.service';
+import { UserService } from '../../@services/user/user.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -14,20 +16,33 @@ export class SignupComponent implements OnInit {
     password_confirmation : null
   };
   public error: any = [];
-  constructor(private http:HttpClient) { }
+  constructor(
+    private service:UserService,
+    private Token:TokenService,
+    private router:Router
+    ) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(){
-    this.http.post('http://127.0.0.1:8000/api/signup',this.form).subscribe((response)=>{
-      console.log(response);
-    },(error)=>{
-      console.log(error)
-      this.handleError(error);
-    });
+    this.service.signup(this.form).subscribe(
+      data => this.handleData(data),
+      error => this.handleError(error)
+    );
   }
-  handleError(error){
+
+  handleData(data){
+    this.Token.handleToken(data.access_token);
+    if(this.Token.loggedIn())
+    {
+      this.router.navigateByUrl('/profile');
+    }
+    else{
+      this.router.navigateByUrl("/login");
+    }
+  }
+  handleError(error:any){
     this.error = error.error.errors;
   }
 
